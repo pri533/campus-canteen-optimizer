@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="description"
+        content="Plan your campus lunch, browse the canteen menu,
+                 and collect your order in a scheduled pickup window."
+    >
+
+    <title>Campus Bites | Campus Canteen Optimizer</title>
+
+    <link rel="stylesheet" href="style.css">
+    <script src="campus.js" defer></script>
+</head>
+
+<body>
+    <a class="skip-link" href="#main-content">
+        Skip to main content
+    </a>
+
+    <!-- HEADER -->
+    <header class="site-header">
+        <div class="container header-content">
+
+            <a class="brand" href="index.html" aria-label="Campus Bites home">
+                <span class="brand-icon" aria-hidden="true"></span>
+
+                <span class="brand-text">
+                    <span class="brand-name">Campus Bites</span>
+                    <span class="brand-tagline">Your break. Better spent.</span>
+                </span>
+            </a>
+
+            <nav class="main-navigation" aria-label="Main navigation">
+                <a href="#menu">Explore menu</a>
+                <a href="#how-it-works">How it works</a>
+
+                <a class="cart-link" href="#cart">
+                    My tray
+                    <span id="header-cart-count" aria-label="0 items">
+                        0
+                    </span>
+                </a>
+            </nav>
+
+        </div>
+    </header>
+
+    <main id="main-content" class="container">
+
+        <!-- INTRODUCTION -->
+        <section class="hero" aria-labelledby="hero-title">
+
+            <div class="hero-content">
+                <p class="eyebrow">
+                    A little planning. A better lunch break.
+                </p>
+
+                <h1 id="hero-title">
+                    Spend your break eating,
+                    <span>not waiting.</span>
+                </h1>
+
+                <p class="hero-description">
+                    Pick your favourites, choose an available pickup window 
+                    and check when your food is ready.
+                </p>
+
+                <a class="button button-primary" href="#menu">
+                    Find your next bite
+                    <span aria-hidden="true">↗</span>
+                </a>
+
+                <div class="break-details">
+                    <span aria-hidden="true">🕒</span>
+
+                    <p>
+                        Campus break
+                        <strong>
+                            <time datetime="12:30">12:30 PM</time>
+                            
+                            <time datetime="13:15">1:15 PM</time>
+                        </strong>
+                    </p>
+                </div>
+            </div>
+
+            <div class="hero-art" aria-hidden="true">
+                <span class="floating-label">Made for your midday cravings</span>
+
+                <div class="food-illustration">
+                     <img
+                         src="https://thestyleworld.b-cdn.net/wp-content/uploads/2024/09/ezgif.com-jpg-to-webp-converter-2024-09-25T142507.782.webp"
+                         alt="food"
+                         class="hero-food-image"
+    >
+                </div>
+
+                <span class="floating-label">Good food. Better timing.</span>
+            </div>
+
+        </section>
+
+        <aside class="demo-notice" aria-label="Prototype information">
+            <strong>Student project preview</strong>
+            <!-- <p>
+                Menu items and prices are examples. Live stock, pickup
+                availability, and order placement are not connected yet.
+            </p> -->
+        </aside>
+
+        <!-- ORDERING GUIDE -->
+        <section
+            id="how-it-works"
+            class="how-it-works"
+            aria-labelledby="how-it-works-title"
+        >
+            <div class="section-heading">
+                <p class="eyebrow">From lecture to lunch</p>
+                <h2 id="how-it-works-title">Your lunch, in three steps</h2>
+            </div>
+
+            <ol class="steps-list">
+                <li class="step-card">
+                    <span class="step-number" aria-hidden="true">01</span>
+                    <h3>Build your tray</h3>
+                    <p>Choose food from the canteen menu.</p>
+                </li>
+
+                <li class="step-card">
+                    <span class="step-number" aria-hidden="true">02</span>
+                    <h3>Plan your pickup</h3>
+                    <p>Choose a window with available kitchen capacity.</p>
+                </li>
+
+                <li class="step-card">
+                    <span class="step-number" aria-hidden="true">03</span>
+                    <h3>Collect when ready</h3>
+                    <p>Check your order status and show your collection token.</p>
+                </li>
+            </ol>
+        </section>
+
+        <!-- MENU AND CART -->
+        <div class="ordering-layout">
+
+            <section id="menu" class="menu-section" aria-labelledby="menu-title">
+
+                <div class="section-heading">
+                    <div>
+                        <p class="eyebrow">Something for every craving</p>
+                        <h2 id="menu-title">The canteen menu</h2>
+                    </div>
+
+                    <span class="section-label">Sample menu</span>
+                </div>
+
+                <!-- JavaScript will handle searching -->
+                <div class="search-container">
+                    <label for="menu-search">Find your favourite</label>
+
+                    <input
+                        type="search"
+                        id="menu-search"
+                        name="menu-search"
+                        placeholder="Search sandwiches, noodles, tea..."
+                        aria-controls="menu-grid"
+                    >
+                </div>
+
+                <!-- JavaScript will update aria-pressed when filtering -->
+                <div
+                    class="category-filters"
+                    role="group"
+                    aria-label="Filter menu by category"
+                >
+                    <button
+                        type="button"
+                        class="filter-button active"
+                        data-category="all"
+                        aria-pressed="true"
+                    >
+                        All bites
+                    </button>
+
+                    <button
+                        type="button"
+                        class="filter-button"
+                        data-category="meals"
+                        aria-pressed="false"
+                    >
+                        Meals
+                    </button>
+
+                    <button
+                        type="button"
+                        class="filter-button"
+                        data-category="snacks"
+                        aria-pressed="false"
+                    >
+                        Snacks
+                    </button>
+
+                    <button
+                        type="button"
+                        class="filter-button"
+                        data-category="drinks"
+                        aria-pressed="false"
+                    >
+                        Drinks
+                    </button>
+                </div>
+
+                <div id="menu-grid" class="menu-grid">
+
+    <!-- NOODLES -->
+    <article class="food-card" data-category="meals">
+        <div class="food-art food-art-noodles" aria-hidden="true">
+            🍜
+        </div>
+
+        <div class="food-card-content">
+            <span class="food-category">Meals</span>
+            <h3>Noodles & Maggi</h3>
+
+            <p class="food-description">
+                A little spice, a little comfort. Find your favourite bowl.
+            </p>
+
+            <details class="food-options">
+                <summary>
+                    View options
+                    <span class="options-count">5 varieties</span>
+                </summary>
+
+                <ul class="variant-list">
+                    <li class="variant-item">
+                        <div class="variant-info">
+                            <h4>Chilli Garlic Noodles</h4>
+                            <span class="variant-price">₹80</span>
+                        </div>
+                        <button type="button" class="add-to-cart-button"
+                            data-id="101"
+                            data-name="Chilli Garlic Noodles"
+                            data-price="80"
+                            aria-label="Add Chilli Garlic Noodles to tray">
+                            Add <span aria-hidden="true">+</span>
+                        </button>
+                    </li>
+
+                    <li class="variant-item">
+                        <div class="variant-info">
+                            <h4>Schezwan Noodles</h4>
+                            <span class="variant-price">₹85</span>
+                        </div>
+                        <button type="button" class="add-to-cart-button"
+                            data-id="102"
+                            data-name="Schezwan Noodles"
+                            data-price="85"
+                            aria-label="Add Schezwan Noodles to tray">
+                            Add <span aria-hidden="true">+</span>
+                        </button>
+                    </li>
+
+                    <li class="variant-item">
+                        <div class="variant-info">
+                            <h4>Garlic Noodles</h4>
+                            <span class="variant-price">₹75</span>
+                        </div>
+                        <button type="button" class="add-to-cart-button"
+                            data-id="103"
+                            data-name="Garlic Noodles"
+                            data-price="75"
+                            aria-label="Add Garlic Noodles to tray">
+                            Add <span aria-hidden="true">+</span>
+                        </button>
+                    </li>
+
+                    <li class="variant-item">
+                        <div class="variant-info">
+                            <h4>Paneer Noodles</h4>
+                            <span class="variant-price">₹100</span>
+                        </div>
+                        <button type="button" class="add-to-cart-button"
+                            data-id="104"
+                            data-name="Paneer Noodles"
+                            data-price="100"
+                            aria-label="Add Paneer Noodles to tray">
+                            Add <span aria-hidden="true">+</span>
+                        </button>
+                    </li>
+
+                    <li class="variant-item">
+                        <div class="variant-info">
+                            <h4>Veg Maggi</h4>
+                            <span class="variant-price">₹45</span>
+                        </div>
+                        <button type="button" class="add-to-cart-button"
+                            data-id="105"
+                            data-name="Veg Maggi"
+                            data-price="45"
+                            aria-label="Add Veg Maggi to tray">
+                            Add <span aria-hidden="true">+</span>
+                        </button>
+                    </li>
+                </ul>
+            </details>
+        </div>
+    </article>
+
+    <!-- PASTA -->
+    <article class="food-card" data-category="meals">
+        <div class="food-art food-art-pasta" aria-hidden="true">
+            🍝
+        </div>
+
+        <div class="food-card-content">
+            <span class="food-category">Meals</span>
+            <h3>Pasta</h3>
+
+            <p class="food-description">
+                Creamy, saucy, and made for your midday cravings.
+            </p>
+
+            <details class="food-options">
+                <summary>
+                    View options
+                    <span class="options-count">3 varieties</span>
+                </summary>
+
+                <ul class="variant-list">
+                    <li class="variant-item">
+                        <div class="variant-info">
+                            <h4>White Sauce Pasta</h4>
+                            <span class="variant-price">₹100</span>
+                        </div>
+                        <button type="button" class="add-to-cart-button"
+                            data-id="201"
+                            data-name="White Sauce Pasta"
+                            data-price="100"
+                            aria-label="Add White Sauce Pasta to tray">
+                            Add <span aria-hidden="true">+</span>
+                        </button>
+                    </li>
+
+                    <li class="variant-item">
+                        <div class="variant-info">
+                            <h4>Mix Sauce Pasta</h4>
+                            <span class="variant-price">₹110</span>
+                        </div>
+                        <button type="button" class="add-to-cart-button"
+                            data-id="202"
+                            data-name="Mix Sauce Pasta"
+                            data-price="110"
+                            aria-label="Add Mix Sauce Pasta to tray">
+                            Add <span aria-hidden="true">+</span>
+                        </button>
+                    </li>
+
+                    <li class="variant-item">
+                        <div class="variant-info">
+                            <h4>Veg Pasta</h4>
+                            <span class="variant-price">₹85</span>
+                        </div>
+                        <button type="button" class="add-to-cart-button"
+                            data-id="203"
+                            data-name="Veg Pasta"
+                            data-price="85"
+                            aria-label="Add Veg Pasta to tray">
+                            Add <span aria-hidden="true">+</span>
+                        </button>
+                    </li>
+                </ul>
+            </details>
+        </div>
+    </article>
+
+    <!-- SANDWICHES -->
+    <article class="food-card" data-category="snacks">
+        <div class="food-art food-art-sandwich" aria-hidden="true">
+            🥪
+        </div>
+
+        <div class="food-card-content">
+            <span class="food-category">Snacks</span>
+            <h3>Sandwiches</h3>
+
+            <p class="food-description">
+                Golden toast, generous fillings, and your favourite flavours.
+            </p>
+
+            <details class="food-options">
+                <summary>
+                    View options
+                    <span class="options-count">4 varieties</span>
+                </summary>
+
+                <ul class="variant-list">
+                    <li class="variant-item">
+                        <div class="variant-info">
+                            <h4>Tandoori Sandwich</h4>
+                            <span class="variant-price">₹80</span>
+                        </div>
+                        <button type="button" class="add-to-cart-button"
+                            data-id="301"
+                            data-name="Tandoori Sandwich"
+                            data-price="80"
+                            aria-label="Add Tandoori Sandwich to tray">
+                            Add <span aria-hidden="true">+</span>
+                        </button>
+                    </li>
+
+                    <li class="variant-item">
+                        <div class="variant-info">
+                            <h4>Veg Grilled Sandwich</h4>
+                            <span class="variant-price">₹60</span>
+                        </div>
+                        <button type="button" class="add-to-cart-button"
+                            data-id="302"
+                            data-name="Veg Grilled Sandwich"
+                            data-price="60"
+                            aria-label="Add Veg Grilled Sandwich to tray">
+                            Add <span aria-hidden="true">+</span>
+                        </button>
+                    </li>
+
+                    <li class="variant-item">
+                        <div class="variant-info">
+                            <h4>Paneer Grilled Sandwich</h4>
+                            <span class="variant-price">₹90</span>
+                        </div>
+                        <button type="button" class="add-to-cart-button"
+                            data-id="303"
+                            data-name="Paneer Grilled Sandwich"
+                            data-price="90"
+                            aria-label="Add Paneer Grilled Sandwich to tray">
+                            Add <span aria-hidden="true">+</span>
+                        </button>
+                    </li>
+
+                    <li class="variant-item">
+                        <div class="variant-info">
+                            <h4>Cheese Corn Sandwich</h4>
+                            <span class="variant-price">₹85</span>
+                        </div>
+                        <button type="button" class="add-to-cart-button"
+                            data-id="304"
+                            data-name="Cheese Corn Sandwich"
+                            data-price="85"
+                            aria-label="Add Cheese Corn Sandwich to tray">
+                            Add <span aria-hidden="true">+</span>
+                        </button>
+                    </li>
+                </ul>
+            </details>
+        </div>
+    </article>
+
+    <!-- ROLLS -->
+    <article class="food-card" data-category="snacks">
+        <div class="food-art food-art-rolls" aria-hidden="true">
+            🌯
+        </div>
+
+        <div class="food-card-content">
+            <span class="food-category">Snacks</span>
+            <h3>Rolls</h3>
+
+            <p class="food-description">
+                A filling bite, wrapped up and ready for your break.
+            </p>
+
+            <details class="food-options">
+                <summary>
+                    View options
+                    <span class="options-count">3 varieties</span>
+                </summary>
+
+                <ul class="variant-list">
+                    <li class="variant-item">
+                        <div class="variant-info">
+                            <h4>Egg Roll</h4>
+                            <span class="variant-price">₹60</span>
+                        </div>
+                        <button type="button" class="add-to-cart-button"
+                            data-id="401"
+                            data-name="Egg Roll"
+                            data-price="60"
+                            aria-label="Add Egg Roll to tray">
+                            Add <span aria-hidden="true">+</span>
+                        </button>
+                    </li>
+
+                    <li class="variant-item">
+                        <div class="variant-info">
+                            <h4>Veg Roll</h4>
+                            <span class="variant-price">₹50</span>
+                        </div>
+                        <button type="button" class="add-to-cart-button"
+                            data-id="402"
+                            data-name="Veg Roll"
+                            data-price="50"
+                            aria-label="Add Veg Roll to tray">
+                            Add <span aria-hidden="true">+</span>
+                        </button>
+                    </li>
+
+                    <li class="variant-item">
+                        <div class="variant-info">
+                            <h4>Paneer Roll</h4>
+                            <span class="variant-price">₹80</span>
+                        </div>
+                        <button type="button" class="add-to-cart-button"
+                            data-id="403"
+                            data-name="Paneer Roll"
+                            data-price="80"
+                            aria-label="Add Paneer Roll to tray">
+                            Add <span aria-hidden="true">+</span>
+                        </button>
+                    </li>
+                </ul>
+            </details>
+        </div>
+    </article>
+
+    <!-- BEVERAGES -->
+    <article class="food-card" data-category="drinks">
+        <div class="food-art food-art-tea" aria-hidden="true">
+            ☕
+        </div>
+
+        <div class="food-card-content">
+            <span class="food-category">Drinks</span>
+            <h3>Beverages</h3>
+
+            <p class="food-description">
+                Something warm, something chilled, something refreshing.
+            </p>
+
+            <details class="food-options">
+                <summary>
+                    View options
+                    <span class="options-count">5 varieties</span>
+                </summary>
+
+                <ul class="variant-list">
+                    <li class="variant-item">
+                        <div class="variant-info">
+                            <h4>Coffee</h4>
+                            <span class="variant-price">₹25</span>
+                        </div>
+                        <button type="button" class="add-to-cart-button"
+                            data-id="501"
+                            data-name="Coffee"
+                            data-price="25"
+                            aria-label="Add Coffee to tray">
+                            Add <span aria-hidden="true">+</span>
+                        </button>
+                    </li>
+
+                    <li class="variant-item">
+                        <div class="variant-info">
+                            <h4>Tea</h4>
+                            <span class="variant-price">₹15</span>
+                        </div>
+                        <button type="button" class="add-to-cart-button"
+                            data-id="502"
+                            data-name="Tea"
+                            data-price="15"
+                            aria-label="Add Tea to tray">
+                            Add <span aria-hidden="true">+</span>
+                        </button>
+                    </li>
+
+                    <li class="variant-item">
+                        <div class="variant-info">
+                            <h4>Orange Juice</h4>
+                            <span class="variant-price">₹50</span>
+                        </div>
+                        <button type="button" class="add-to-cart-button"
+                            data-id="503"
+                            data-name="Orange Juice"
+                            data-price="50"
+                            aria-label="Add Orange Juice to tray">
+                            Add <span aria-hidden="true">+</span>
+                        </button>
+                    </li>
+
+                    <li class="variant-item">
+                        <div class="variant-info">
+                            <h4>Cold Coffee</h4>
+                            <span class="variant-price">₹60</span>
+                        </div>
+                        <button type="button" class="add-to-cart-button"
+                            data-id="504"
+                            data-name="Cold Coffee"
+                            data-price="60"
+                            aria-label="Add Cold Coffee to tray">
+                            Add <span aria-hidden="true">+</span>
+                        </button>
+                    </li>
+
+                    <li class="variant-item">
+                        <div class="variant-info">
+                            <h4>Fresh Lime Water</h4>
+                            <span class="variant-price">₹30</span>
+                        </div>
+                        <button type="button" class="add-to-cart-button"
+                            data-id="505"
+                            data-name="Fresh Lime Water"
+                            data-price="30"
+                            aria-label="Add Fresh Lime Water to tray">
+                            Add <span aria-hidden="true">+</span>
+                        </button>
+                    </li>
+                </ul>
+            </details>
+        </div>
+    </article>
+
+</div>
+
+                <p id="no-menu-results" class="empty-state" hidden>
+                    No matching bites found. Try another search or category.
+                </p>
+
+            </section>
+
+            <!-- CART -->
+            <aside id="cart" class="cart-panel" aria-labelledby="cart-title">
+
+                <div class="cart-heading">
+                    <div>
+                        <p class="eyebrow">Your lunch lineup</p>
+                        <h2 id="cart-title">My tray</h2>
+                    </div>
+
+                    <span aria-hidden="true">🛍️</span>
+                </div>
+
+                <div id="empty-cart-message" class="empty-cart">
+                    <span class="empty-cart-icon" aria-hidden="true">🍽️</span>
+                    <h3>A little empty in here</h3>
+                    <p>Add something delicious from the menu to get started.</p>
+                </div>
+
+                <!-- JavaScript will insert cart items here -->
+                <ul
+                    id="cart-items"
+                    class="cart-items"
+                    aria-label="Items in your tray"
+                    hidden
+                ></ul>
+
+                <!-- Short feedback for cart changes -->
+                <p
+                    id="cart-feedback"
+                    class="cart-feedback"
+                    role="status"
+                ></p>
+
+                <div class="cart-summary">
+                    <div class="summary-row">
+                        <span>Items</span>
+                        <span id="cart-item-count">0</span>
+                    </div>
+
+                    <div class="summary-row summary-total">
+                        <span>Total</span>
+                        <strong id="cart-total">₹0</strong>
+                    </div>
+                </div>
+
+                <!-- Available windows must eventually come from the backend -->
+                <div class="pickup-section">
+                    <label for="pickup-slot">Pickup window</label>
+
+                    <select
+                        id="pickup-slot"
+                        name="pickup-slot"
+                        aria-describedby="pickup-help"
+                        disabled
+                    >
+                        <option value="">Pickup availability not connected</option>
+                    </select>
+
+                    <p id="pickup-help" class="helper-text">
+                        Available windows will depend on your order
+                        and the kitchen’s remaining capacity.
+                    </p>
+                </div>
+
+                <button
+                    type="button"
+                    id="place-order-button"
+                    class="button button-primary checkout-button"
+                    aria-describedby="checkout-help"
+                    disabled
+                >
+                    Place order
+                </button>
+
+                <p id="checkout-help" class="helper-text">
+                    Ordering will be enabled after the booking service
+                    is connected.
+                </p>
+
+                <p class="collection-note">
+                    Check that your order is ready before approaching
+                    the pickup counter.
+                </p>
+
+            </aside>
+
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+        <div class="container footer-content">
+            <p><strong>Campus Bites</strong> — Your break. Better spent.</p>
+            <p>A Campus Canteen Optimizer project.</p>
+        </div>
+    </footer>
+
+    <noscript>
+        <p>
+            JavaScript is required to search the menu, manage your tray,
+            and place an order.
+        </p>
+    </noscript>
+</body>
+</html>
